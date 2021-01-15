@@ -1,0 +1,35 @@
+{
+  "name": "new",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "src/index.tsx",
+  "dependencies": {
+    "@types/styled-components": "^5.1.7",
+    "mobx": "6.0.4",
+    "mobx-react": "7.0.5",
+    "mobx-state-tree": "5.0.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-scripts": "4.0.1",
+     "styled-components": ""
+  },
+  "devDependencies": {
+    "@types/react": "",
+    "@types/react-dom": "",
+    "prettier": "^2.2.1",
+    "typescript": ""
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
