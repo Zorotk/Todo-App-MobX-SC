@@ -45,7 +45,12 @@ const RootStore = types
 const rootStore = RootStore.create({});
 
 const App = observer(() => {
-
+  const data = rootStore.todoStore.filter((item) =>
+    Object.values(item).some((value) =>
+      typeof value !== "string"
+        ? value === Number(rootStore.name)
+        : value.includes(rootStore.name)
+    ))
   return (
     <div>
       <div>
@@ -57,7 +62,7 @@ const App = observer(() => {
         />
   
       <button onClick={() => rootStore.addTodo()}>add</button>
-      {rootStore.todoStore.map((u, i) => (
+      {data.map((u, i) => (
         <Todo key={i}>
           <TodoItem>{u.name}</TodoItem>
           <input
