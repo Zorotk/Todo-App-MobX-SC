@@ -2,48 +2,11 @@ import  React from "react";
 import { render } from "react-dom";
 import { observer } from "mobx-react";
 import "./styles.css";
-import { Instance, types } from "mobx-state-tree";
-import {Header,Main, Todo, TodoItem} from './styles/header'
+import { AppWrapper, Flex, Header, Main, Todo, TodoItem } from './styles/header'
+import Button from './styles/Button'
 
-
-
-const TodoStore = types
-  .model("TodoStore", {
-    name: "",
-    completed: true,
-    id: types.number,
-  })
-  .actions((self) => ({
-    toggleComleted() {
-      self.completed = !self.completed;
-    }
-  
-  }));
-
-const RootStore = types
-  .model("RootStore", {
-    todoStore: types.array(TodoStore),
-    name: "",
-  })
-  .actions((self) => ({
-    addTodo() {
-      self.todoStore.push({
-        name: self.name,
-        completed: false,
-        id: Math.random(),
-      });
-      self.name = ''
-    },
-    deleteTodo(todo:Instance<typeof TodoStore>) {
-      self.todoStore.remove(todo)
-    },
-      setName(title:string) {
-      self.name=title
-    }
-  }));
-
-const rootStore = RootStore.create({});
-
+import {rootStore} from './store'
+import style,{createGlobalStyle} from 'styled-components'
 const App = observer(() => {
   const data = rootStore.todoStore.filter((item) =>
     Object.values(item).some((value) =>
@@ -52,16 +15,19 @@ const App = observer(() => {
         : value.includes(rootStore.name)
     ))
   return (
+    <AppWrapper>
     <div>
       <div>
         <Header>Todo</Header>
-        <Main>
-           <input
+          <Main>
+            <Flex justify='center' margin='33px'>
+              <input
         value={rootStore.name}
         onChange={(e) => rootStore.setName(e.target.value)}
         />
-  
-      <button onClick={() => rootStore.addTodo()}>add</button>
+      <Button onClick={() => rootStore.addTodo()}>add</Button>
+            </Flex>
+           
       {data.map((u, i) => (
         <Todo key={i}>
           <TodoItem>{u.name}</TodoItem>
@@ -75,9 +41,22 @@ const App = observer(() => {
       ))}
         </Main>
            </div>
-    </div>
+      </div>
+      </AppWrapper>
   );
 });
-
+const Global = createGlobalStyle`
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-size:17px;
+  outline:none;
+}
+`
 const rootElement = document.getElementById("root");
-render(<App />, rootElement);
+render(
+  <>  
+    <Global/>
+    <App />
+  </>, rootElement);
