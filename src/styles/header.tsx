@@ -1,6 +1,6 @@
 import styled, { StyledFunction } from "styled-components"
 import React from "react";
-import {Styles} from './interface'
+import { Styles } from './interface'
 export const Header = styled.header`
   display:grid;
   justify-content:center;
@@ -26,7 +26,7 @@ export const TodoItem = styled.div`
   margin:10px;
   padding:20px;
 `
- export const Todo = styled.div`
+export const Todo = styled.div`
    display: flex;
    height: 100%;
    background:green;
@@ -43,14 +43,14 @@ export const AppWrapper = styled.div`
 
 
 
- const ContainWrapper = styled.div<Styles>`
+const ContainWrapper = styled.div<Styles>`
 display: flex;
 flex-direction: ${props => props.direction || 'row'};
 align-items: ${props => props.align || 'stretch'};
 justify-content: ${props => props.justify || 'stretch'};
-margin:${({margin}) => margin || '0'} ;
+margin:${({ margin }) => margin || '0'} ;
 `
 export const Flex = (props: any) => {
-  return <ContainWrapper { ...props } />
-}; 
+  return <ContainWrapper {...props} />
+};
 
